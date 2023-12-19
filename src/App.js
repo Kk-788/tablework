@@ -1,16 +1,8 @@
 import "./App.css";
 
 export default function App() {
-  function TitledTable({ title, children }) {
-    return (
-      <div>
-        <div className={"titled-table-title"}>{title}</div>
-        <table>{children}</table>
-      </div>
-    );
-  }
 
-  let houseData = JSON.stringify({
+  let houseData = {
     bedrooms: 3,
     bathrooms: 2,
     cars: 2,
@@ -27,36 +19,39 @@ export default function App() {
         iq: 200,
       },
     ],
-  });
+  };
 
-  const house = JSON.parse(houseData);
-  let [houseKeys, houseValues] = [[], []];
+  let columns = [];
 
-  for (const [key, value] of Object.entries(house)) {
-    if (typeof value != "object") {
-      houseKeys.push(key);
-      houseValues.push(value);
+  for (const [key, value] of Object.entries(houseData)) {
+    if (!Array.isArray(value)) {
+      columns.push(key);
     }
   }
 
   return (
     <div>
-      <h1>my-react-app</h1>
-      <p>{houseKeys.join(", ")}</p>
-      <TitledTable title={"house"}>
-        <tbody>
+      <div className={"titled-table-title"}>House Data</div>
+      <table>
+        <thead>
           <tr className={"tr-key"}>
-            {houseKeys.map((key) => (
-              <td>{key}</td>
+            {columns.map((key, index) => (
+                <th key={index}>{key}</th>
             ))}
           </tr>
+        </thead>
+        <tbody>
           <tr>
-            {houseValues.map((value) => (
-              <td>{value}</td>
-            ))}
+            {
+              columns.map((column, index) => {
+                return (
+                    <td key={index}>{houseData[column]}</td>
+                )
+              })
+            }
           </tr>
         </tbody>
-      </TitledTable>
+      </table>
     </div>
   );
 }

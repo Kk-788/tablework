@@ -1,0 +1,27 @@
+
+table, th, td {
+   border: 1px solid black;
+}
+
+.tr-key td {
+  background-color: #e0e0e0;
+  padding-top: 10px;
+}
+
+td {
+  padding: 5px;
+}
+
+.titled-table-title {
+  position: relative;
+  width: fit-content;
+  left: 10px;
+  top: 12px;
+  padding: 2px 4px;
+  margin-top: -12px;
+
+  border: black solid 1px;
+  border-radius: 5px;
+  background-color: white;
+  color: blue;
+}
